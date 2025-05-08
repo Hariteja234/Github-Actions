@@ -36,10 +36,6 @@ jobs:
       run: mvn -B package
       working-directory: ./navi
 
-    - name: Generate Dependency Graph
-      run: mvn com.github.ferstl:depgraph-maven-plugin:4.0.1:graph
-      working-directory: ./navi
-
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@v3
       with:
