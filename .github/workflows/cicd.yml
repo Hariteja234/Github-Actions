@@ -14,13 +14,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-  id-token: write  # Only valid keys here
-
 jobs:
   compile:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      dependencies: write
 
     steps:
     - uses: actions/checkout@v4
