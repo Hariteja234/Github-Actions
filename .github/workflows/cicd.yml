@@ -16,28 +16,28 @@ on:
 
 jobs:
   compile:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-      working-directory: ./navi  # <--- adjust this
+      - uses: actions/checkout@v4
 
-    - name: Generate Dependency Graph
-      run: mvn com.github.ferstl:depgraph-maven-plugin:4.0.1:graph
-      working-directory: ./navi
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
+      - name: Build with Maven
+        run: mvn -B package
+        working-directory: ./navi
 
+      - name: Generate Dependency Graph
+        run: mvn com.github.ferstl:depgraph-maven-plugin:4.0.1:graph
+        working-directory: ./navi
 
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@v4
+        with:
+          directory: ./navi
 
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
