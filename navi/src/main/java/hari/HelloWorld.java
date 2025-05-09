@@ -1,5 +1,7 @@
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        String name = args.length > 0 ? args[0] : "world";
+        System.out.println("Hello, " + name + "!");
     }
 }
+
